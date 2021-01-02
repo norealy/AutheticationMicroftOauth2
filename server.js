@@ -15,10 +15,13 @@ const redirect_url = "http://localhost:4000/auth/microsoft";
 const scope = "user.read";
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-app.use((req, res, next) => {
-  const string = `Method: ${req.method},Path: ${req.path}, IP Address: ${req.ip}`;
-  console.log(string);
-  next();
+
+app.get('/auth/login', (req, res) => {
+  let path = __dirname.split('/');
+  path.pop();
+  path = path.join('/')
+  const file = __dirname + '/views/login.html'
+  return res.sendFile(file)
 });
 
 app.get('/auth/login-microsoft', (req, res) => {
@@ -78,39 +81,11 @@ app.get('/auth/microsoft', async (req, res) => {
     console.log("POST FORM DATA Eroor");
     return res.status(401).send(error)
   }
-})
-
-app.post('/auth/microsoft', async (req, res) => {
-  
-  console.log("3");
-  
-  // const options = {
-  //   method: 'GET',
-  //   headers: { 'Authorization': 'application/x-www-form-urlencoded' },
-  //   data: qs.stringify(data),
-  //   url: url_getToken,
-  //   };
-  //   try {
-  //     axios(options)
-  //       .then(function (response) {
-  //         console.log("1.Data",response.data);
-  //       })
-  //       .catch(function (error) {
-  //         console.log("error");
-  //       });
-  //   } catch (error) {
-  //     console.log("POST FORM DATA Eroor");
-  //     return res.status(401).send(error)
-  // }
-
 });
 
-app.get('/auth/login', (req, res) => {
-  let path = __dirname.split('/');
-  path.pop();
-  path = path.join('/')
-  const file = __dirname + '/views/login.html'
-  return res.sendFile(file)
+app.get('/auth/login-google', (req, res) => {
+  const urlRequestAuthor = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_url}&response_mode=query&scope=${scope}&state=${state}`;
+  return res.redirect(urlRequestAuthor)
 });
 
 app.listen(port, () => {
