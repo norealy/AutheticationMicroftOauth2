@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Signin Form by Colorlib</title>
+
+    <link rel="stylesheet" href="../material-icon/css/material-design-iconic-font.min.css">
+
+    <link rel="stylesheet" href="../vendor/css/style.css">
+</head>
+<body>
+    <div class="main">
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="/images/signin-image.jpg" alt="sing up image"></figure>
+                        <a href="register.html" class="signup-image-link">Create an account</a>
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">Login</h2>
+                        <form class="register-form" id="login-form" name="formLogin" action="/login" method="POST">
+                            <div class="form-group">
+                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="idusername" placeholder="USer Name" value="user55"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="idpassword" placeholder="Password" value="Password328"/>
+                            </div>
+                            <button type="submit" >Login</button>
+                        </form>
+                        <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="/auth/login-microsoft"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
