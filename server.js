@@ -50,7 +50,26 @@ app.get('/auth/microsoft', async (req, res) => {
   try {
     axios(options)
       .then(function (response) {
-        console.log("1.Data",response.data);
+        console.log("2.Data",response.data);
+        const options = {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${response.data.access_token}` },
+          url: "https://graph.microsoft.com/v1.0/me",
+          };
+          try {
+            axios(options)
+              .then(function (response) {
+                console.log("2.Data User ",response.data);
+                res.send({"User data ": response.data})
+              })
+              .catch(function (error) {
+                console.log("error");
+                res.send("Error get data !!!")
+              });
+          } catch (error) {
+            console.log("POST FORM DATA Eroor");
+            return res.status(401).send(error)
+        }
       })
       .catch(function (error) {
         console.log("error");
@@ -65,22 +84,24 @@ app.post('/auth/microsoft', async (req, res) => {
   
   console.log("3");
   
-        try {
-              const dataUser = axios.get('https://graph.microsoft.com/v1.0/me')
-              .then((resp)=>{
-                console.log("3")
-                console.log("Get user Ok");
-              })
-              .catch((err)=>{
-                console.log("3")
-                console.log("Get user error");
-              })
-              console.log("dataUser :", dataUser)
-              // return res.send("dataUser : ", dataUser)
-            } catch (error) {
-              console.log("Get User Eroor");
-              // res.status(200).send("Get User Eroor")
-            }
+  // const options = {
+  //   method: 'GET',
+  //   headers: { 'Authorization': 'application/x-www-form-urlencoded' },
+  //   data: qs.stringify(data),
+  //   url: url_getToken,
+  //   };
+  //   try {
+  //     axios(options)
+  //       .then(function (response) {
+  //         console.log("1.Data",response.data);
+  //       })
+  //       .catch(function (error) {
+  //         console.log("error");
+  //       });
+  //   } catch (error) {
+  //     console.log("POST FORM DATA Eroor");
+  //     return res.status(401).send(error)
+  // }
 
 });
 
